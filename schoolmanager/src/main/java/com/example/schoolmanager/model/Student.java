@@ -1,43 +1,85 @@
 package com.example.schoolmanager.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 
 @Entity
-@Table(name = "students")
+@Table(
+    name = "students",
+    uniqueConstraints = {
+        @UniqueConstraint(columnNames = "email")
+    }
+)
 public class Student {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
+
+    @NotBlank(message = "Name is required")
+    @Size(max = 100)
+    @Column(nullable = false, length = 100)
     private String name;
+
+    @NotBlank(message = "Email is required")
+    @Email(message = "Invalid email format")
+    @Size(max = 150)
+    @Column(nullable = false, unique = true, length = 150)
     private String email;
 
-    public Student() {}
-    public Student(int id, String name, String email) {
-        this.id = id;
+    // =========================
+    // Constructors
+    // =========================
+
+    public Student() {
+    }
+
+    public Student(String name, String email) {
         this.name = name;
         this.email = email;
     }
-    public int getId() {
+
+    // =========================
+    // Getter & Setter
+    // =========================
+
+    public Integer getId() {
         return id;
     }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
     public String getName() {
         return name;
     }
-    public String getEmail() {
-        return email;
-    }
-    public void setId(int id) {
-        this.id = id;
-    }
+
     public void setName(String name) {
         this.name = name;
     }
+
+    public String getEmail() {
+        return email;
+    }
+
     public void setEmail(String email) {
         this.email = email;
     }
-    
+
+    // =========================
+    // toString
+    // =========================
+
+    @Override
+    public String toString() {
+        return "Student{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                '}';
+    }
 }
+
