@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="vi"
+      xmlns:th="http://www.thymeleaf.org">
 
 <head>
 
@@ -8,7 +9,9 @@
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0">
 
-    <title>Student Manager</title>
+    <title>Quản Lý Sinh Viên</title>
+
+    <!-- GOOGLE FONT -->
 
     <link rel="preconnect"
           href="https://fonts.googleapis.com">
@@ -19,6 +22,11 @@
 
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
           rel="stylesheet">
+
+    <!-- FONT AWESOME -->
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"/>
 
     <style>
 
@@ -35,12 +43,75 @@
             background:
                 linear-gradient(
                     135deg,
+                    #020617,
                     #0f172a,
-                    #1e293b,
-                    #334155
+                    #1e293b
                 );
 
             min-height:100vh;
+
+            padding:35px;
+
+            color:white;
+        }
+
+        .container{
+
+            display:grid;
+
+            grid-template-columns:
+                3fr 7fr;
+
+            gap:30px;
+
+            align-items:start;
+        }
+
+        /* LEFT */
+
+        .left-panel{
+
+            position:sticky;
+
+            top:20px;
+        }
+
+        .form-card{
+
+            background:
+                rgba(255,255,255,0.06);
+
+            border:
+                1px solid rgba(255,255,255,0.08);
+
+            backdrop-filter:blur(18px);
+
+            border-radius:30px;
+
+            padding:35px;
+
+            box-shadow:
+                0 10px 40px rgba(0,0,0,0.35);
+        }
+
+        .avatar{
+
+            width:110px;
+
+            height:110px;
+
+            border-radius:50%;
+
+            margin:auto;
+
+            margin-bottom:25px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #6366f1,
+                    #8b5cf6
+                );
 
             display:flex;
 
@@ -48,108 +119,84 @@
 
             align-items:center;
 
-            padding:40px;
-
-            overflow-x:hidden;
-        }
-
-        .container{
-
-            width:100%;
-
-            max-width:1200px;
-
-            background:
-                rgba(255,255,255,0.08);
-
-            backdrop-filter:blur(18px);
-
-            border:
-                1px solid rgba(255,255,255,0.1);
-
-            border-radius:30px;
-
-            padding:40px;
-
-            box-shadow:
-                0 10px 40px rgba(0,0,0,0.4);
-
-            animation:fadeIn 0.7s ease;
-        }
-
-        @keyframes fadeIn{
-
-            from{
-                opacity:0;
-                transform:translateY(20px);
-            }
-
-            to{
-                opacity:1;
-                transform:translateY(0);
-            }
-
-        }
-
-        .header{
-
-            display:flex;
-
-            justify-content:space-between;
-
-            align-items:center;
-
-            margin-bottom:30px;
-
-            flex-wrap:wrap;
-
-            gap:20px;
-        }
-
-        .header h1{
-
-            color:white;
-
-            font-size:38px;
+            font-size:40px;
 
             font-weight:700;
+
+            box-shadow:
+                0 10px 30px rgba(99,102,241,0.4);
         }
 
-        .header p{
+        .form-header{
+
+            text-align:center;
+
+            margin-bottom:35px;
+        }
+
+        .form-header h2{
+
+            font-size:30px;
+
+            margin-bottom:10px;
+        }
+
+        .form-header p{
+
+            color:#94a3b8;
+        }
+
+        .input-group{
+
+            margin-bottom:22px;
+        }
+
+        .input-group label{
+
+            display:block;
+
+            margin-bottom:10px;
 
             color:#cbd5e1;
 
-            margin-top:5px;
+            font-size:14px;
         }
 
-        .form-section{
+        .input-box{
 
-            display:grid;
+            position:relative;
+        }
 
-            grid-template-columns:
-                repeat(auto-fit,minmax(250px,1fr));
+        .input-box i{
 
-            gap:15px;
+            position:absolute;
 
-            margin-bottom:20px;
+            left:18px;
+
+            top:50%;
+
+            transform:translateY(-50%);
+
+            color:#94a3b8;
         }
 
         input{
 
             width:100%;
 
-            padding:15px;
-
             border:none;
 
             outline:none;
 
-            border-radius:15px;
+            border-radius:18px;
 
             background:
                 rgba(255,255,255,0.08);
 
             color:white;
+
+            padding:
+                16px 16px 16px 50px;
 
             font-size:14px;
 
@@ -157,17 +204,17 @@
         }
 
         input::placeholder{
-            color:#cbd5e1;
+
+            color:#94a3b8;
         }
 
         input:focus{
 
             background:
-                rgba(255,255,255,0.15);
+                rgba(255,255,255,0.12);
 
             box-shadow:
-                0 0 0 3px rgba(59,130,246,0.4);
-
+                0 0 0 4px rgba(99,102,241,0.35);
         }
 
         .button-group{
@@ -176,47 +223,215 @@
 
             gap:15px;
 
-            margin-top:10px;
-
-            margin-bottom:20px;
-
-            flex-wrap:wrap;
+            margin-top:30px;
         }
 
         button{
 
             border:none;
 
-            padding:14px 22px;
-
-            border-radius:14px;
-
             cursor:pointer;
+
+            border-radius:18px;
+
+            padding:15px 20px;
+
+            color:white;
 
             font-weight:600;
 
             transition:0.3s;
-
-            font-size:14px;
         }
 
         button:hover{
 
-            transform:translateY(-2px);
-
-            opacity:0.9;
+            transform:translateY(-3px);
         }
 
         .btn-save{
 
+            flex:1;
+
             background:
                 linear-gradient(
                     135deg,
-                    #22c55e,
-                    #16a34a
+                    #6366f1,
+                    #8b5cf6
+                );
+        }
+
+        .btn-reset{
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #475569,
+                    #334155
+                );
+        }
+
+        /* RIGHT */
+
+        .table-card{
+
+            background:
+                rgba(255,255,255,0.06);
+
+            border:
+                1px solid rgba(255,255,255,0.08);
+
+            backdrop-filter:blur(18px);
+
+            border-radius:30px;
+
+            padding:35px;
+
+            box-shadow:
+                0 10px 40px rgba(0,0,0,0.35);
+        }
+
+        .table-header{
+
+            display:flex;
+
+            justify-content:space-between;
+
+            align-items:center;
+
+            gap:20px;
+
+            flex-wrap:wrap;
+
+            margin-bottom:30px;
+        }
+
+        .table-header h2{
+
+            font-size:32px;
+
+            margin-bottom:5px;
+        }
+
+        .table-header p{
+
+            color:#94a3b8;
+        }
+
+        .search-box{
+
+            width:320px;
+
+            position:relative;
+        }
+
+        .search-box i{
+
+            position:absolute;
+
+            left:18px;
+
+            top:50%;
+
+            transform:translateY(-50%);
+
+            color:#94a3b8;
+        }
+
+        .search-box input{
+
+            padding-left:50px;
+        }
+
+        /* TABLE */
+
+        .table-wrapper{
+
+            overflow-x:auto;
+        }
+
+        table{
+
+            width:100%;
+
+            border-collapse:collapse;
+        }
+
+        thead{
+
+            background:
+                rgba(255,255,255,0.06);
+        }
+
+        th{
+
+            padding:22px;
+
+            text-align:left;
+
+            font-size:14px;
+
+            color:#cbd5e1;
+        }
+
+        td{
+
+            padding:22px;
+
+            border-bottom:
+                1px solid rgba(255,255,255,0.06);
+
+            color:#e2e8f0;
+        }
+
+        tbody tr{
+
+            transition:0.3s;
+        }
+
+        tbody tr:hover{
+
+            background:
+                rgba(255,255,255,0.05);
+        }
+
+        .student-info{
+
+            display:flex;
+
+            align-items:center;
+
+            gap:14px;
+        }
+
+        .student-avatar{
+
+            width:45px;
+
+            height:45px;
+
+            border-radius:50%;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #6366f1,
+                    #8b5cf6
                 );
 
-            color:white;
+            display:flex;
+
+            justify-content:center;
+
+            align-items:center;
+
+            font-weight:700;
+        }
+
+        .actions{
+
+            display:flex;
+
+            gap:12px;
         }
 
         .btn-edit{
@@ -227,8 +442,6 @@
                     #3b82f6,
                     #2563eb
                 );
-
-            color:white;
         }
 
         .btn-delete{
@@ -239,34 +452,15 @@
                     #ef4444,
                     #dc2626
                 );
-
-            color:white;
         }
 
-        .btn-cancel{
-
-            background:
-                linear-gradient(
-                    135deg,
-                    #64748b,
-                    #475569
-                );
-
-            color:white;
-        }
-
-        .search-box{
-
-            margin-bottom:20px;
-        }
+        /* MESSAGE */
 
         .message{
 
-            margin-bottom:15px;
+            margin-bottom:20px;
 
             font-weight:600;
-
-            font-size:14px;
         }
 
         .success{
@@ -277,127 +471,74 @@
             color:#f87171;
         }
 
-        table{
-
-            width:100%;
-
-            border-collapse:collapse;
-
-            overflow:hidden;
-
-            border-radius:20px;
-
-            background:
-                rgba(255,255,255,0.05);
-
-            backdrop-filter:blur(10px);
-        }
-
-        table th{
-
-            background:
-                rgba(255,255,255,0.08);
-
-            padding:18px;
-
-            color:white;
-
-            font-size:15px;
-        }
-
-        table td{
-
-            padding:18px;
-
-            text-align:center;
-
-            color:#e2e8f0;
-
-            border-bottom:
-                1px solid rgba(255,255,255,0.08);
-        }
-
-        table tr{
-
-            transition:0.3s;
-        }
-
-        table tr:hover{
-
-            background:
-                rgba(255,255,255,0.08);
-        }
-
-        .action-buttons{
-
-            display:flex;
-
-            justify-content:center;
-
-            gap:10px;
-        }
+        /* PAGINATION */
 
         .pagination{
 
-            margin-top:25px;
-
             display:flex;
 
             justify-content:center;
 
-            gap:10px;
+            gap:12px;
+
+            margin-top:30px;
 
             flex-wrap:wrap;
         }
 
         .pagination button{
 
-            width:42px;
+            width:45px;
 
-            height:42px;
+            height:45px;
 
             border:none;
 
-            border-radius:12px;
+            border-radius:14px;
 
             background:
                 rgba(255,255,255,0.08);
 
             color:white;
 
+            font-weight:600;
+
             cursor:pointer;
 
             transition:0.3s;
-
-            font-weight:600;
         }
 
         .pagination button:hover{
 
-            background:#3b82f6;
+            background:
+                rgba(99,102,241,0.5);
         }
 
         .pagination button.active{
 
-            background:#2563eb;
+            background:
+                linear-gradient(
+                    135deg,
+                    #6366f1,
+                    #8b5cf6
+                );
 
             box-shadow:
-                0 0 10px rgba(37,99,235,0.5);
+                0 0 15px rgba(99,102,241,0.5);
         }
 
-        @media(max-width:768px){
+        /* MOBILE */
 
-            .header{
-                flex-direction:column;
-                align-items:flex-start;
+        @media(max-width:1000px){
+
+            .container{
+
+                grid-template-columns:1fr;
             }
 
-            table{
-                font-size:13px;
-            }
+            .left-panel{
 
-            .action-buttons{
-                flex-direction:column;
+                position:relative;
             }
 
         }
@@ -410,123 +551,229 @@
 
 <div class="container">
 
-    <div class="header">
+    <!-- LEFT -->
 
-        <div>
+    <div class="left-panel">
 
-            <h1>🎓 Student Manager</h1>
+        <div class="form-card">
 
-            <p>Modern Student Management Dashboard</p>
+            <div class="avatar"
+                 id="avatarLetter">
+
+                S
+
+            </div>
+
+            <div class="form-header">
+
+                <h2>Thông Tin Sinh Viên</h2>
+
+                <p>Thêm hoặc cập nhật sinh viên</p>
+
+            </div>
+
+            <input type="hidden"
+                   id="studentId">
+
+            <!-- NAME -->
+
+            <div class="input-group">
+
+                <label>Họ Và Tên</label>
+
+                <div class="input-box">
+
+                    <i class="fa-solid fa-user"></i>
+
+                    <input type="text"
+                           id="name"
+                           placeholder="Nhập tên sinh viên"
+                           onkeyup="updateAvatar()">
+
+                </div>
+
+            </div>
+
+            <!-- EMAIL -->
+
+            <div class="input-group">
+
+                <label>Email</label>
+
+                <div class="input-box">
+
+                    <i class="fa-solid fa-envelope"></i>
+
+                    <input type="email"
+                           id="email"
+                           placeholder="Nhập email sinh viên">
+
+                </div>
+
+            </div>
+
+            <!-- BUTTON -->
+
+            <div class="button-group">
+
+                <button class="btn-save"
+                        onclick="saveStudent()">
+
+                    <i class="fa-solid fa-floppy-disk"></i>
+                    Lưu
+
+                </button>
+
+                <button class="btn-reset"
+                        onclick="resetForm()">
+
+                    <i class="fa-solid fa-rotate-left"></i>
+                    Làm Mới
+
+                </button>
+
+            </div>
 
         </div>
 
     </div>
 
-    <input type="hidden"
-           id="studentId">
+    <!-- RIGHT -->
 
-    <div class="form-section">
+    <div class="right-panel">
 
-        <input type="text"
-               id="name"
-               placeholder="Enter student name">
+        <div class="table-card">
 
-        <input type="email"
-               id="email"
-               placeholder="Enter student email">
+            <div class="table-header">
 
-    </div>
+                <div>
 
-    <div class="button-group">
+                    <h2>Danh Sách Sinh Viên</h2>
 
-        <button class="btn-save"
-                onclick="saveStudent()">
-            Save Student
-        </button>
-
-        <button class="btn-cancel"
-                onclick="resetForm()">
-            Cancel
-        </button>
-
-    </div>
-
-    <div class="search-box">
-
-        <input type="text"
-               id="search"
-               placeholder="Search student..."
-               onkeyup="searchStudent()">
-
-    </div>
-
-    <div id="message"
-         class="message"></div>
-
-    <table>
-
-        <thead>
-
-        <tr>
-
-            <th>ID</th>
-
-            <th>Name</th>
-
-            <th>Email</th>
-
-            <th width="220">
-                Actions
-            </th>
-
-        </tr>
-
-        </thead>
-
-        <tbody id="studentTable">
-
-        <tr th:each="s : ${students}">
-
-            <td th:text="${s.id}"></td>
-
-            <td th:text="${s.name}"></td>
-
-            <td th:text="${s.email}"></td>
-
-            <td>
-
-                <div class="action-buttons">
-
-                    <button class="btn-edit"
-                            th:attr="onclick=|editStudent('${s.id}','${s.name}','${s.email}')|">
-
-                        Edit
-
-                    </button>
-
-                    <button class="btn-delete"
-                            th:attr="onclick=|deleteStudent('${s.id}')|">
-
-                        Delete
-
-                    </button>
+                    <p>
+                        Tổng:
+                        <span th:text="${students.size()}">0</span>
+                        sinh viên
+                    </p>
 
                 </div>
 
-            </td>
+                <div class="search-box">
 
-        </tr>
+                    <i class="fa-solid fa-magnifying-glass"></i>
 
-        </tbody>
+                    <input type="text"
+                           id="search"
+                           placeholder="Tìm kiếm sinh viên..."
+                           onkeyup="searchStudent()">
 
-    </table>
+                </div>
 
-    <div class="pagination"
-         id="pagination"></div>
+            </div>
+
+            <div id="message"
+                 class="message"></div>
+
+            <div class="table-wrapper">
+
+                <table>
+
+                    <thead>
+
+                    <tr>
+
+                        <th>ID</th>
+
+                        <th>Sinh Viên</th>
+
+                        <th>Email</th>
+
+                        <th>Hành Động</th>
+
+                    </tr>
+
+                    </thead>
+
+                    <tbody id="studentTable">
+
+                    <tr th:each="s : ${students}">
+
+                        <td th:text="${s.id}"></td>
+
+                        <td>
+
+                            <div class="student-info">
+
+                                <div class="student-avatar"
+                                     th:text="${#strings.substring(s.name,0,1)}">
+
+                                    A
+
+                                </div>
+
+                                <span th:text="${s.name}"></span>
+
+                            </div>
+
+                        </td>
+
+                        <td th:text="${s.email}"></td>
+
+                        <td>
+
+                            <div class="actions">
+
+                                <button class="btn-edit"
+                                        th:attr="onclick=|editStudent('${s.id}','${s.name}','${s.email}')|">
+
+                                    <i class="fa-solid fa-pen"></i>
+
+                                </button>
+
+                                <button class="btn-delete"
+                                        th:attr="onclick=|deleteStudent('${s.id}')|">
+
+                                    <i class="fa-solid fa-trash"></i>
+
+                                </button>
+
+                            </div>
+
+                        </td>
+
+                    </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+            <!-- PAGINATION -->
+
+            <div class="pagination"
+                 id="pagination"></div>
+
+        </div>
+
+    </div>
 
 </div>
 
 <script>
+
+    let rowsPerPage = 5
+
+    let currentPage = 1
+
+    const rows =
+        Array.from(
+            document.querySelectorAll(
+                "#studentTable tr"
+            )
+        )
+
+    /* MESSAGE */
 
     function showMessage(text,type){
 
@@ -545,6 +792,24 @@
         },3000)
 
     }
+
+    /* AVATAR */
+
+    function updateAvatar(){
+
+        let name =
+            document.getElementById("name")
+            .value
+
+        document.getElementById("avatarLetter")
+            .innerText =
+                name
+                ? name.charAt(0).toUpperCase()
+                : "S"
+
+    }
+
+    /* SAVE */
 
     async function saveStudent(){
 
@@ -565,7 +830,7 @@
         if(name === "" || email === ""){
 
             showMessage(
-                "Please enter full information",
+                "Vui lòng nhập đầy đủ thông tin",
                 "error"
             )
 
@@ -610,8 +875,8 @@
             showMessage(
 
                 id
-                ? "Student updated successfully"
-                : "Student added successfully",
+                ? "Cập nhật sinh viên thành công"
+                : "Thêm sinh viên thành công",
 
                 "success"
 
@@ -626,13 +891,15 @@
         }catch(error){
 
             showMessage(
-                "Server error",
+                "Lỗi máy chủ",
                 "error"
             )
 
         }
 
     }
+
+    /* EDIT */
 
     function editStudent(id,name,email){
 
@@ -642,22 +909,22 @@
 
         document.getElementById("email").value = email
 
+        updateAvatar()
+
         window.scrollTo({
 
             top:0,
-
             behavior:"smooth"
 
         })
 
     }
 
+    /* DELETE */
+
     async function deleteStudent(id){
 
-        let confirmDelete =
-            confirm("Delete this student?")
-
-        if(!confirmDelete){
+        if(!confirm("Bạn có chắc muốn xóa sinh viên này?")){
             return
         }
 
@@ -675,7 +942,7 @@
             }
 
             showMessage(
-                "Deleted successfully",
+                "Xóa sinh viên thành công",
                 "success"
             )
 
@@ -688,13 +955,15 @@
         }catch(error){
 
             showMessage(
-                "Delete failed",
+                "Xóa thất bại",
                 "error"
             )
 
         }
 
     }
+
+    /* RESET */
 
     function resetForm(){
 
@@ -704,7 +973,12 @@
 
         document.getElementById("email").value = ""
 
+        document.getElementById("avatarLetter")
+            .innerText = "S"
+
     }
+
+    /* SEARCH */
 
     function searchStudent(){
 
@@ -713,11 +987,6 @@
             .value
             .toLowerCase()
 
-        let rows =
-            document.querySelectorAll(
-                "#studentTable tr"
-            )
-
         rows.forEach(row=>{
 
             let name =
@@ -725,33 +994,16 @@
                 .innerText
                 .toLowerCase()
 
-            if(name.includes(keyword)){
-
-                row.style.display = ""
-
-            }else{
-
-                row.style.display = "none"
-
-            }
+            row.style.display =
+                name.includes(keyword)
+                ? ""
+                : "none"
 
         })
 
     }
 
-    const rowsPerPage = 5
-
-    const rows =
-        Array.from(
-            document.querySelectorAll(
-                "#studentTable tr"
-            )
-        )
-
-    const pagination =
-        document.getElementById("pagination")
-
-    let currentPage = 1
+    /* PAGINATION */
 
     function displayTable(page){
 
@@ -783,12 +1035,15 @@
 
     function setupPagination(){
 
+        let pagination =
+            document.getElementById("pagination")
+
+        pagination.innerHTML = ""
+
         let pageCount =
             Math.ceil(
                 rows.length / rowsPerPage
             )
-
-        pagination.innerHTML = ""
 
         for(let i = 1; i <= pageCount; i++){
 
@@ -814,7 +1069,9 @@
     function updatePaginationButtons(){
 
         let buttons =
-            pagination.querySelectorAll("button")
+            document.querySelectorAll(
+                ".pagination button"
+            )
 
         buttons.forEach((btn,index)=>{
 
